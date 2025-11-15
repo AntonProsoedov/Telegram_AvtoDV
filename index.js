@@ -26,7 +26,6 @@ const brand = {
   ssangyong: 'SsangYong',
   hyundai: 'Hyundai'
 }
-const API_KEY_BOT = '8189986425:AAHG5yqlUpx7TevA2vfk1_t_KPP99Opaw78';
 
 let cars;
 let pages;
