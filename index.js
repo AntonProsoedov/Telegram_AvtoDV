@@ -138,7 +138,10 @@ bot.on('callback_query', async msg => {
 
 bot.on('text', async msg => {
   await bot.deleteMessage(msg.chat.id, msg.message_id); //Удалять введенный текст
-  if(msg.text == '/menu' || msg.text == 'Главное меню' || '/start') {
+  if(msg.text == '/start') {
+    await bot.sendMessage(msg.chat.id, `Здравствуйте, ${msg.from.first_name}👋`)
+  }
+  if(msg.text == '/menu' || msg.text == 'Главное меню') {
     await bot.sendMessage(msg.chat.id, 'Главное меню', menu.getMainMenu(msg.chat.id))
   }
 
