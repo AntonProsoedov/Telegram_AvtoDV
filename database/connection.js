@@ -13,7 +13,7 @@ const connectionOptions = {
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.DATABASE_URL), connectionOptions;
-    console.log('✅ Успешно подключено к локальной MongoDB');
+    console.log('✅ Успешно подключено к Mongo Atlas');
 
   } catch (error) {
     console.error('Database connection error:', error);
