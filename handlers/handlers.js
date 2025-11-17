@@ -123,7 +123,7 @@ class Handlers {
         {
           $bucket: {
             groupBy: "$carMileage",
-            boundaries: [0, 50, 100, 150, 200, 250],
+            boundaries: [0, 50, 100, 150, 201],
             default: "noData",
             output: {
               count: { $sum: 1 },
@@ -138,8 +138,7 @@ class Handlers {
                   { case: { $eq: ["$_id", 0] }, then: "0-49 тыс.км" },
                   { case: { $eq: ["$_id", 50] }, then: "50-99 тыс.км" },
                   { case: { $eq: ["$_id", 100] }, then: "100-149 тыс.км" },
-                  { case: { $eq: ["$_id", 150] }, then: "150-199 тыс.км" },
-                  { case: { $eq: ["$_id", 200] }, then: "200-249 тыс.км" },
+                  { case: { $eq: ["$_id", 150] }, then: "150-200 тыс.км" },
                   { case: { $eq: ["$_id", "noData"] }, then: 'noData' }
                 ],
                 default: "Неизвестный диапазон"
