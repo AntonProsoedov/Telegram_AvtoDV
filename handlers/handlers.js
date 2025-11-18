@@ -176,7 +176,7 @@ class Handlers {
             post.push({
               type: 'photo',
               media: images.length ? path.join(carImages, images[i]) : 'sources/img/default.jpg',
-              caption: `${getEmoji(car.country)}${car.brand} ${car.model}${getEmoji(car.country)}\n\n${car.equipment? '👉Комплектация ' + car.equipment + '\n': ''}👉${car.yearOfManufacture} год выпуска\n${car.carMileage? '👉Пробег ' + car.carMileage + ' тыс. км\n': ''}${car.auctionValuation? '👉Аукционная оценка ' + car.auctionValuation + ' балла\n': ''}${car.finalPrice? '👉' + car.finalPrice + ' т.р.\n': ''}\n`
+              caption: `${getEmoji(car.country)}${car.brand} ${car.model}${getEmoji(car.country)}\n${car.customerСity? '\nОтправляется в ' + car.customerСity + '\n': ''}\n${car.equipment? '👉Комплектация ' + car.equipment + '\n': ''}👉${car.yearOfManufacture} год выпуска\n${car.carMileage? '👉Пробег ' + car.carMileage + ' тыс. км\n': ''}${car.auctionValuation? '👉Аукционная оценка ' + car.auctionValuation + ' балла\n': ''}${car.finalPrice? '👉' + car.finalPrice + ' т.р.\n': ''}\n`
             });
           } else {
             post.push({

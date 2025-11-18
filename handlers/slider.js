@@ -14,6 +14,16 @@ export default class Slider {
     return `${this.currentPage} из ${this.pages}`
   }
   firstPage(cars) {
+    this.currentPage = 1;
+    this.from = 0;
+    this.to = step;
+    console.log(`${this.currentPage} из ${this.pages}`)
+    return cars.slice(this.from, this.to);
+  }
+  lastPage(cars) {
+    this.currentPage = this.pages;
+    this.from = this.pages - 1;
+    this.to = this.pages;
     console.log(`${this.currentPage} из ${this.pages}`)
     return cars.slice(this.from, this.to);
   }

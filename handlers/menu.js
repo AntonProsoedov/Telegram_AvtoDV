@@ -36,7 +36,6 @@ class Menu {
       return {
         reply_markup: {
           inline_keyboard: [
-            [{text: ' Вернуться в архив ', callback_data: 'archiveMenu'}]
           ]
         }
       }
@@ -44,8 +43,8 @@ class Menu {
       return {
         reply_markup: {
           inline_keyboard: [
-            [{text: ' вперед 👉 ', callback_data: 'nextPage'}],
-            [{text: ' Вернуться в архив ', callback_data: 'archiveMenu'}]
+            [{text: ' вперед ➡️ ', callback_data: 'nextPage'}],
+            [{text: ' конец ⏭️ ', callback_data: 'lastPage'}],
           ]
         }
       }
@@ -53,8 +52,8 @@ class Menu {
       return {
         reply_markup: {
           inline_keyboard: [
-            [{text: ' 👈 назад', callback_data: 'prevPage'}],
-            [{text: ' Вернуться в архив ', callback_data: 'archiveMenu'}]
+            [{text: ' ⬅️ назад', callback_data: 'prevPage'}],
+            [{text: ' ⏮️ начало ', callback_data: 'firstPage'}]
           ]
         }
       }
@@ -62,8 +61,8 @@ class Menu {
       return {
         reply_markup: {
           inline_keyboard: [
-            [{text: ' 👈 назад', callback_data: 'prevPage'}, {text: 'вперед 👉 ', callback_data: 'nextPage'}],
-            [{text: ' Вернуться в архив ', callback_data: 'archiveMenu'}]
+            [{text: ' ⬅️ назад', callback_data: 'prevPage'}, {text: 'вперед ➡️ ', callback_data: 'nextPage'}],
+            [{text: ' ⏮️ в начало', callback_data: 'firstPage'}, {text: 'в конец ⏭️ ', callback_data: 'lastPage'}]
           ]
         }
       }

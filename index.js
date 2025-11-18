@@ -79,7 +79,7 @@ bot.on('callback_query', async msg => {
       await bot.sendMessage(msg.message.chat.id, pages.getArticleForMenu(), menu.pages(pages.getCurrentPage()))
     } 
 
-    else if (msg.data == 'archiveMenu') {
+    if (msg.data == 'lastPage') {
       await bot.editMessageReplyMarkup(
         { inline_keyboard: [] },
         {
@@ -87,9 +87,28 @@ bot.on('callback_query', async msg => {
           message_id: msg.message.message_id
         }
       );
-      await bot.sendMessage(msg.message.chat.id, 'Архив купленных авто 🚘', menu.getArchiveMenu())
+      const posts = handlers.createPosts(pages.lastPage(cars));
+      for(const post of posts) {
+        await bot.sendMediaGroup(msg.message.chat.id, post);
+      }
+      await bot.sendMessage(msg.message.chat.id, pages.getArticleForMenu(), menu.pages(pages.getCurrentPage()))
     }
-     
+
+    if (msg.data == 'firstPage') {
+      await bot.editMessageReplyMarkup(
+        { inline_keyboard: [] },
+        {
+          chat_id: msg.message.chat.id,
+          message_id: msg.message.message_id
+        }
+      );
+      const posts = handlers.createPosts(pages.firstPage(cars));
+      for(const post of posts) {
+        await bot.sendMediaGroup(msg.message.chat.id, post);
+      }
+      await bot.sendMessage(msg.message.chat.id, pages.getArticleForMenu(), menu.pages(pages.getCurrentPage()))
+    } 
+
     else if (filterCallbacksData.includes(msg.data)) {
       await bot.editMessageReplyMarkup(
         { inline_keyboard: [] },
@@ -98,12 +117,11 @@ bot.on('callback_query', async msg => {
           message_id: msg.message.message_id
         }
       );
-      await bot.deleteMessage(msg.message.chat.id, msg.message.message_id)
-      // console.log('Поиск по фильтру ' + msg.data);
+      // await bot.deleteMessage(msg.message.chat.id, msg.message.message_id)
       cars = await filterCallback(msg.data);
       pages = new Slider(cars.length);
 
-      await bot.sendMessage(msg.message.chat.id, `Всего найдено ${cars.length} авто`, menu.closeMenu())
+      await bot.sendMessage(msg.message.chat.id, `Всего найдено ${cars.length} авто`)
       const posts = handlers.createPosts(pages.firstPage(cars));
       for (const post of posts) {
         await bot.sendMediaGroup(msg.message.chat.id, post);
@@ -119,7 +137,7 @@ bot.on('callback_query', async msg => {
           message_id: msg.message.message_id
         }
       );
-      await bot.deleteMessage(msg.message.chat.id, msg.message.message_id)
+      // await bot.editMessageText('', {chat_id: msg.message.chat.id, message_id: msg.message.message_id})
       // console.log('Поиск по фильтру ' + msg.data);
       const models = await handlers.getModels(msg.data)
       // console.log(models)
