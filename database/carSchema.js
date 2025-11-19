@@ -45,6 +45,10 @@ const carSchema = new Schema({
   },
   customerСity: {
     type: String,
+  },
+  buyDate: {
+    type: Date,
+    required: true
   }
 });
 

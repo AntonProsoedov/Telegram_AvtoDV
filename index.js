@@ -15,7 +15,7 @@ const brand = {
   volkswagen: 'Volkswagen',
   mazda: 'Mazda',
   mercedes: 'Mercedes-Benz',
-  bmv: 'BMW',
+  bmw: 'BMW',
   volvo: 'Volvo',
   mitsubishi: 'Mitsubishi',
   audi: 'Audi',
@@ -24,7 +24,8 @@ const brand = {
   suzuki: 'Suzuki',
   mini: 'MINI',
   ssangyong: 'SsangYong',
-  hyundai: 'Hyundai'
+  hyundai: 'Hyundai',
+  bestune: 'Bestune'
 }
 
 let cars;
@@ -117,7 +118,6 @@ bot.on('callback_query', async msg => {
           message_id: msg.message.message_id
         }
       );
-      // await bot.deleteMessage(msg.message.chat.id, msg.message.message_id)
       cars = await filterCallback(msg.data);
       pages = new Slider(cars.length);
 
@@ -137,10 +137,7 @@ bot.on('callback_query', async msg => {
           message_id: msg.message.message_id
         }
       );
-      // await bot.editMessageText('', {chat_id: msg.message.chat.id, message_id: msg.message.message_id})
-      // console.log('Поиск по фильтру ' + msg.data);
       const models = await handlers.getModels(msg.data)
-      // console.log(models)
       await bot.sendMessage(msg.message.chat.id, `Модели ${msg.data}:`, menu.filterMenu(models))
       const callbacksData = []
       for (const {id} of models) {
@@ -163,7 +160,7 @@ bot.on('text', async msg => {
     await bot.sendMessage(msg.chat.id, 'Главное меню', menu.getMainMenu(msg.chat.id))
   }
 
-  else if(msg.text == 'Контакты') {
+  else if(msg.text == 'Контакты ☎️') {
     await bot.sendMessage(msg.chat.id, menu.getContactMenu())
   }
 
@@ -175,26 +172,10 @@ bot.on('text', async msg => {
     await bot.sendMessage(msg.chat.id, 'Меню закрыто', menu.closeMenu())
   }
 
-  else if(msg.text == 'Архив купленных авто 🚘') {
-    await bot.sendMessage(msg.chat.id, 'Архив купленных авто 🚘', menu.getArchiveMenu())
+  else if(msg.text == 'Купленные автомобили 🚘') {
+    await bot.sendMessage(msg.chat.id, 'Купленные автомобили 🚘', menu.getArchiveMenu())
   }
 
-  // else if(msg.text == 'Все автомобили') {
-  //   try {
-  //     cars = await handlers.getAll();
-  //     pages = new Slider(cars.length);
-  //     // console.log('Всего автомобилей: ' + cars.length);
-  //     // console.log('Последний: ' + cars[cars.length - 1].brand + ' ' + cars[cars.length - 1].model);
-  //     await bot.sendMessage(msg.chat.id, `Всего ${cars.length} авто`, menu.closeMenu())
-  //     const posts = handlers.createPosts(pages.firstPage(cars));
-  //     for (const post of posts) {
-  //       await bot.sendMediaGroup(msg.chat.id, post);
-  //     }
-  //     await bot.sendMessage(msg.chat.id, pages.getArticleForMenu(), menu.pages(pages.getCurrentPage()))
-  //   } catch (error) {
-  //     console.log('Все автомобили: ' + error)
-  //   }
-  // }
   else if(msg.text == 'Статистика') {
     const allCars = await handlers.countAll();
     const topBrands = await handlers.getTopBrands();
@@ -203,12 +184,6 @@ bot.on('text', async msg => {
     const avgPrice = await handlers.getAveragePrice()
 
     await bot.sendMessage(msg.chat.id, menu.getStatistics(allCars, topBrands, topModels, avgMileage, avgPrice))
-
-    // console.log(allCars)
-    // console.log(topBrands)
-    // console.log(topModels)
-    // console.log(avgMileage)
-    // console.log(avgPrice)
   }
 
   else if(msg.text == 'По марке') {
@@ -249,16 +224,17 @@ bot.on('text', async msg => {
   else if(msg.text == 'Добавить авто') {
     const newCar = {
       country: 'Japan', // China   Korea   Japan
-      brand: brand.mercedes,
-      model: 'C-Class',
-      equipment: 'C180 COUPE SPORT',
-      yearOfManufacture: 2016,
-      carMileage: 29,
-      auctionValuation: '4.0',
-      finalPrice: 1700,
-      customerСity: 'поселок Белореченский'
+      brand: brand.audi,
+      model: 'Q3',
+      equipment: '1.5 35 TFSI',
+      yearOfManufacture: 2020,
+      carMileage: 61,
+      auctionValuation: '4.5',
+      finalPrice: 1790,
+      customerСity: 'город Иркутск',
+      buyDate: new Date('2025-11-18')
     };
-//Последний добавленный авто 15 октября
+//Последний добавленный авто 18 ноября
     // await handlers._addCar(newCar)
     // await bot.sendMessage(msg.chat.id, `Автомобиль ${newCar.brand} ${newCar.model} добален`)
     // console.log(`Добавлен ${newCar.brand} ${newCar.model}`)
